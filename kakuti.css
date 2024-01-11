@@ -1,0 +1,46 @@
+.kakutei{
+    top:0px;left:0px;
+    width:100%;
+    height:100%;
+    text-align:center;
+    font-size: small;
+    background-color:#C0DEED;
+
+}
+.icon {
+    height: auto;
+    width: 30px;;
+}
+
+input{
+    width: auto;
+}
+table{
+    margin: 3px auto;
+    background-color: skyblue;
+}
+.table{
+    margin-right: auto;
+}
+
+.XY{
+    width: 70px;
+}
+.green{
+    background-color: #97ee8d;
+}
+.blue{
+    background-color: #80c3fd;
+}
+.purple{
+    background-color: #d88bf6;
+}
+.red{
+    background-color: #ff8090;
+}
+.yellow{
+    background-color: #fff88f;
+}
+.t{
+    background-color: #98fb98;
+}
