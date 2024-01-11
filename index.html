@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>確定キル数</title>
+    <link rel="stylesheet" href="kakuti.css">
+</head>
+<body class="kakutei">
+    <h2>キルに必要な弾数計算</h2>
+    <button onclick="location.href='https://note.com/preview/ne36f65f2f7a4?prev_access_key=41ce466deb944ff55454244da0c47500'">使い方、注意事項</button>
+    <br>
+    <p>半角数字を入力してください。通常攻撃のダメージに0は入力できません。0にしたい場合は空欄にしてください。</p>
+    <table border="1" class="table">
+        <tr>
+            <td class="t">通常攻撃のダメージ</td>
+            <td><input type="text" id="atk" oninput="kakutei()"></td>
+        </tr>
+        <tr>
+            <td class="t">攻撃 <input type="text" id="X" value="X" class="XY" oninput="kakutei()">のダメージ <br>(ウルトなど)</td>
+            <td><input type="number" id="urt" oninput="kakutei()" value="0"></td>
+        </tr> <tr>
+            <td id="Xhit" class="t">を何回当てる</td>
+            <td><select id="urtnum" onchange="kakutei()">
+                <option value="0">0回</option>
+                <option value="1">1回</option>
+                <option value="2">2回</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td class="t">攻撃<input type="text" id="Y" value="Y" class="XY" oninput="kakutei()">のダメージ <br>(ガジェットなど)</td>
+            <td><input type="number" id="gje" oninput="kakutei()" value="0"></td>
+        </tr> <tr>
+            <td id="Yhit" class="t">を何回当てる</td>
+            <td><select id="gjenum" onchange="kakutei()">
+                <option value="0">0回</option>
+                <option value="1">1回</option>
+                <option value="2">2回</option>
+            </select></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>ダメージギアを有効化</td>
+            <td><input type="checkbox" id="damegeg" onchange="kakutei()"></td>
+        </tr>
+        <tr>
+            <td>ガスのバフを有効化</td>
+            <td><input type="checkbox" id="gusb" onchange="kakutei()"></td>
+        </tr>
+        <tr>
+            <td>ラフスのバフを有効化</td>
+            <td><input type="checkbox" id="ruffsb" onchange="kakutei()"></td>
+        </tr>
+        <tr>
+            <td>8-bitのバフを有効化</td>
+            <td><input type="checkbox" id="bitbc" onchange="kakutei()"></td>
+        </tr>
+        <tr>
+            <td>8-bitウルトタイプ</td>
+            <td><select id="bitb" onchange="kakutei()">
+                <option value="0.5">左スタパ</option>
+                <option value="0.35">右スタパ</option>
+            </select></td>
+        </tr>
+    </table>
+    <p id="tyuui"></p>
+    <p id="sum"></p>
+    <hr>
+    <table border="1" class="table">
+        <tr class="t">
+            
+            <th></th>
+            <th>基本確定数</th>
+            <th>シールドギア時</th>
+        </tr>
+        <tr class="green">
+            <td><img src="shelly.png" class="icon"></td>
+            <td id="shery"></td>
+            <td id="sshery"></td>
+        </tr>
+        <tr class="green">
+            <td><img src="nits.png" class="icon"></td>
+            <td id="nita"></td>
+            <td id="snita"></td>
+        </tr>
+        <tr class="green">
+            <td><img src="colt.png" class="icon"></td>
+            <td id="colt"></td>
+            <td id="scolt"></td>
+        </tr>
+        <tr class="green">
+            <td><img src="bull.png" class="icon"></td>
+            <td id="bull"></td>
+            <td id="sbull"></td>
+        </tr>
+        <tr class="green">
+            <td><img src="block.png" class="icon"></td>
+            <td id="block"></td>
+            <td id="sblock"></td>
+        </tr>
+        <tr class="green">
+            <td><img src="elprimo.png" class="icon"></td>
+            <td id="elprimo"></td>
+            <td id="selprimo"></td>
+        </tr>
+        <tr class="green">
+            <td><img src="barley.png" class="icon"></td>
+            <td id="barley"></td>
+            <td id="sbarley"></td>
+        </tr>
+        <tr class="green">
+            <td><img src="poco.png" class="icon"></td>
+            <td id="poco"></td>
+            <td id="spoco"></td>
+        </tr>
+        <tr class="green">
+            <td><img src="rosa.png" class="icon"></td>
+            <td id="rosa"></td>
+            <td id="srosa"></td>
+        </tr>
+        <tr class="blue">
+            <td><img src="jessi.png" class="icon"></td>
+            <td id="jessi"></td>
+            <td id="sjessi"></td>
+        </tr>
+        <tr class="blue">
+            <td><img src="dynamike.png" class="icon"></td>
+            <td id="dynamike"></td>
+            <td id="sdynamike"></td>
+        </tr>
+        <tr class="blue">
+            <td><img src="tick.png" class="icon"></td>
+            <td id="tick"></td>
+            <td id="stick"></td>
+        </tr>
+        <tr class="blue">
+            <td><img src="bit.png" class="icon"></td>
+            <td id="bit"></td>
+            <td id="sbit"></td>
+        </tr>
+        <tr class="blue">
+            <td><img src="rico.png" class="icon"></td>
+            <td id="rico"></td>
+            <td id="srico"></td>
+        </tr>
+        <tr class="blue">
+            <td><img src="darryl.png" class="icon"></td>
+            <td id="darryl"></td>
+            <td id="sdarryl"></td>
+        </tr>
+        <tr class="blue">
+            <td><img src="penny.png" class="icon"></td>
+            <td id="penny"></td>
+            <td id="spenny"></td>
+        </tr>
+        <tr class="blue">
+            <td><img src="carl.png" class="icon"></td>
+            <td id="carl"></td>
+            <td id="scarl"></td>
+        </tr>
+        <tr class="blue">
+            <td><img src="jacky.png" class="icon"></td>
+            <td id="jacky"></td>
+            <td id="sjacky"></td>
+        </tr>
+        <tr class="blue">
+            <td><img src="starjacky.png" class="icon"></td>
+            <td id="bjacky"></td>
+            <td id="bsjacky"></td>
+        </tr>
+        <tr class="blue">
+            <td><img src="gas.png" class="icon"></td>
+            <td id="gas"></td>
+            <td id="sgas"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="bo.png" class="icon"></td>
+            <td id="bo"></td>
+            <td id="sbo"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="emz.png" class="icon"></td>
+            <td id="emz"></td>
+            <td id="semz"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="stu.png" class="icon"></td>
+            <td id="stu"></td>
+            <td id="sstu"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="piper.png" class="icon"></td>
+            <td id="piper"></td>
+            <td id="spiper"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="pam.png" class="icon"></td>
+            <td id="pam"></td>
+            <td id="spam"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="frank.png" class="icon"></td>
+            <td id="frank"></td>
+            <td id="sfrank"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="bibi.png" class="icon"></td>
+            <td id="bibi"></td>
+            <td id="sbibi"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="starbibi.png" class="icon"></td>
+            <td id="bbibi"></td>
+            <td id="bsbibi"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="bea.png" class="icon"></td>
+            <td id="bea"></td>
+            <td id="sbea"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="nani.png" class="icon"></td>
+            <td id="nani"></td>
+            <td id="snani"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="edger.png" class="icon"></td>
+            <td id="edger"></td>
+            <td id="sedger"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="griff.png" class="icon"></td>
+            <td id="griff"></td>
+            <td id="sgriff"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="grom.png" class="icon"></td>
+            <td id="grom"></td>
+            <td id="sgrom"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="bonny.png" class="icon"></td>
+            <td id="bonny"></td>
+            <td id="sbonny"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="gale.png" class="icon"></td>
+            <td id="gale"></td>
+            <td id="sgale"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="collet.png" class="icon"></td>
+            <td id="collet"></td>
+            <td id="scollet"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="belle.png" class="icon"></td>
+            <td id="belle"></td>
+            <td id="sbelle"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="ash.png" class="icon"></td>
+            <td id="ash"></td>
+            <td id="sash"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="lola.png" class="icon"></td>
+            <td id="lola"></td>
+            <td id="slola"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="sam.png" class="icon"></td>
+            <td id="sam"></td>
+            <td id="ssam"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="mandy.png" class="icon"></td>
+            <td id="mandy"></td>
+            <td id="smandy"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="maisie.png" class="icon"></td>
+            <td id="maisie"></td>
+            <td id="smaisie"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="hank.png" class="icon"></td>
+            <td id="hank"></td>
+            <td id="shank"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="pearl.png" class="icon"></td>
+            <td id="pearl"></td>
+            <td id="spearl"></td>
+        </tr>
+        <tr class="purple">
+            <td><img src="larry.png" class="icon"></td>
+            <td id="larry"></td>
+            <td id="slarry"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="mortis.png" class="icon"></td>
+            <td id="mortis"></td>
+            <td id="smortis"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="tara.png" class="icon"></td>
+            <td id="tara"></td>
+            <td id="stara"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="gene.png" class="icon"></td>
+            <td id="gene"></td>
+            <td id="sgene"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="max.png" class="icon"></td>
+            <td id="max"></td>
+            <td id="smax"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="mrp.png" class="icon"></td>
+            <td id="mrp"></td>
+            <td id="smrp"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="sprout.png" class="icon"></td>
+            <td id="sprout"></td>
+            <td id="ssprout"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="byron.png" class="icon"></td>
+            <td id="byron"></td>
+            <td id="sbyron"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="squeak.png" class="icon"></td>
+            <td id="squeak"></td>
+            <td id="ssqueak"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="lou.png" class="icon"></td>
+            <td id="lou"></td>
+            <td id="slou"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="ruffs.png" class="icon"></td>
+            <td id="ruffs"></td>
+            <td id="sruffs"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="buzz.png" class="icon"></td>
+            <td id="buzz"></td>
+            <td id="sbuzz"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="fang.png" class="icon"></td>
+            <td id="fang"></td>
+            <td id="sfang"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="eve.png" class="icon"></td>
+            <td id="eve"></td>
+            <td id="seve"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="janet.png" class="icon"></td>
+            <td id="janet"></td>
+            <td id="sjanet"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="otis.png" class="icon"></td>
+            <td id="otis"></td>
+            <td id="sotis"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="buster.png" class="icon"></td>
+            <td id="buster"></td>
+            <td id="sbuster"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="gray.png" class="icon"></td>
+            <td id="gray"></td>
+            <td id="sgray"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="rt.png" class="icon"></td>
+            <td id="rt"></td>
+            <td id="srt"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="rtbody.png" class="icon"></td>
+            <td id="bodyrt"></td>
+            <td id="sbodyrt"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="starrtbody.png" class="icon"></td>
+            <td id="starbodyrt"></td>
+            <td id="sstarbodyrt"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="starrthead.png" class="icon"></td>
+            <td id="starheadrt"></td>
+            <td id="sstarheadrt"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="willow.png" class="icon"></td>
+            <td id="willow"></td>
+            <td id="swillow"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="dug.png" class="icon"></td>
+            <td id="dug"></td>
+            <td id="sdug"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="chuck.png" class="icon"></td>
+            <td id="chuck"></td>
+            <td id="schuck"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="charlie.png" class="icon"></td>
+            <td id="charlie"></td>
+            <td id="scharlie"></td>
+        </tr>
+        <tr class="red">
+            <td><img src="mico.png" class="icon"></td>
+            <td id="mico"></td>
+            <td id="smico"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="spike.png" class="icon"></td>
+            <td id="spike"></td>
+            <td id="sspike"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="crow.png" class="icon"></td>
+            <td id="crow"></td>
+            <td id="scrow"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="leon.png" class="icon"></td>
+            <td id="leon"></td>
+            <td id="sleon"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="sandy.png" class="icon"></td>
+            <td id="sandy"></td>
+            <td id="ssandy"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="amber.png" class="icon"></td>
+            <td id="amber"></td>
+            <td id="samber"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="mecha.png" class="icon"></td>
+            <td id="bodymeg"></td>
+            <td id="sbodymeg"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="meg.png" class="icon"></td>
+            <td id="meg"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="starmeg.png" class="icon"></td>
+            <td id="starmeg"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="surge.png" class="icon"></td>
+            <td id="surge"></td>
+            <td id="ssurge"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="cheser.png" class="icon"></td>
+            <td id="cheser"></td>
+            <td id="scheser"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="cordelious.png" class="icon"></td>
+            <td id="cordelious"></td>
+            <td id="scordelious"></td>
+        </tr>
+        <tr class="yellow">
+            <td><img src="kit.png" class="icon"></td>
+            <td id="kit"></td>
+            <td id="skit"></td>
+        </tr>
+        
+        
+    </table>
+    <script src="kakutei.js"></script>
+</body>
+</html>
